@@ -1,0 +1,73 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Документация
+README.md
+README.txt
+*.md
+docs/
+LICENSE
+CHANGELOG
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Тесты
+test/
+tests/
+__tests__/
+*.test.py
+*.spec.js
+*.test.js
+coverage/
+.nyc_output/
+
+# Временные файлы
+*.log
+*.tmp
+*.temp
+*.cache
+.env.local
+.env.*.local
+# ВАЖНО: .env НЕ игнорируется - он копируется в образ для работы с python-dotenv
+# Если вы не хотите копировать .env в образ, добавьте его в .gitignore вашего репозитория
+
+# Зависимости (будут установлены в контейнере)
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+# Виртуальное окружение uv — не копируем из хоста, создаётся в контейнере при сборке
+.venv/
+venv/
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# Другие
+*.db-shm
+*.db-wal
