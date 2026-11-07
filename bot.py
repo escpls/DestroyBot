@@ -7183,6 +7183,14 @@ def mafia_resolve_night(game):
     return dead, blocked
 
 
+async def mafia_notify_death(context, game, uid):
+    game.last_word.add(uid)
+    await mafia_dm(context, uid,
+                   "💀 <b>Ты погиб.</b>\n\n"
+                   "Можешь написать одно сообщение в чат. Напиши его здесь, в личке с ботом, "
+                   "и бот отправит его от своего имени.")
+
+
 async def mafia_day(context, game, dead, final=False):
     game.phase = "day"
     await mafia_mute_alive(context, game, False)
