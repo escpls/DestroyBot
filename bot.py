@@ -5733,7 +5733,7 @@ def dice_settle(user, stake, value):
         result += f" ⏳ бонус серии <b>+{bonus}</b>"
     if base > 0 and streak >= 2:
         result += f" · серия {streak}"
-    return (f"✅ {mention_user(user)} — выпало <b>{value}</b>, ставка {stake}: {result}\n"
+    return (f"🎲 {mention_user(user)} — выпало <b>{value}</b>, ставка {stake}: {result}\n"
             f"🪙 Баланс: {balance_text(user.id, False)}")
 
 
@@ -5769,13 +5769,13 @@ async def dice_top_command(update, context):
     ranking = sorted(((int(u), int(v)) for u, v in week.get("profit", {}).items() if int(v) > 0
                       and not is_hidden(u)), key=lambda item: (-item[1], item[0]))[:10]
     if not ranking:
-        await message.reply_text("✅ На этой неделе в кубик еще никто не выигрывал.")
+        await message.reply_text("🎲 На этой неделе в кубик еще никто не выигрывал.")
         return
     medals = ["🥇", "🥈", "🥉"]
     lines = [f"{medals[i] if i < 3 else f'{i + 1}.'} {saved_user_link(u)} — <b>+{v}</b>"
              for i, (u, v) in enumerate(ranking)]
     await message.reply_text(
-        "✅ <b>Топ кубика за неделю</b>\n\n" + "\n".join(lines),
+        "🎲 <b>Топ кубика за неделю</b>\n\n" + "\n".join(lines),
         parse_mode=ParseMode.HTML, **NO_PREVIEW,
     )
 
@@ -6272,7 +6272,7 @@ async def duel_command(update, context):
 
 
 def duel_roll_markup(duel_id):
-    return InlineKeyboardMarkup([[InlineKeyboardButton("✅ Бросить", callback_data=f"du:roll:{duel_id}")]])
+    return InlineKeyboardMarkup([[InlineKeyboardButton("🎲 Бросить", callback_data=f"du:roll:{duel_id}")]])
 
 
 def duel_rolls_status(duel):
@@ -6280,10 +6280,10 @@ def duel_rolls_status(duel):
     lines = []
     for uid in (duel["challenger"], duel["target"]):
         if str(uid) in rolls:
-            lines.append(f"✅ {saved_user_link(uid)} — <b>{rolls[str(uid)]}</b>")
+            lines.append(f"🎲 {saved_user_link(uid)} — <b>{rolls[str(uid)]}</b>")
         else:
-            lines.append(f"✅ {saved_user_link(uid)} — ждем бросок")
-    return "\n".join(lines) + "\n\nНажмите «✅ Бросить», чтобы кинуть кубик."
+            lines.append(f"🎲 {saved_user_link(uid)} — ждем бросок")
+    return "\n".join(lines) + "\n\nНажмите «🎲 Бросить», чтобы кинуть кубик."
 
 
 async def duel_expire(context, duel_id):
@@ -6332,8 +6332,8 @@ async def duel_finish(context, duel_id):
     bet = duel["bet"]
     pot = bet * 2
     coins = data.setdefault("ds_coins", {})
-    scores = (f"✅ {saved_user_link(duel['challenger'])} — <b>{v_ch}</b>\n"
-              f"✅ {saved_user_link(duel['target'])} — <b>{v_tg}</b>\n")
+    scores = (f"🎲 {saved_user_link(duel['challenger'])} — <b>{v_ch}</b>\n"
+              f"🎲 {saved_user_link(duel['target'])} — <b>{v_tg}</b>\n")
     if v_ch == v_tg:
         for uid in (duel["challenger"], duel["target"]):
             coins[str(uid)] = ds_balance(uid) + bet
